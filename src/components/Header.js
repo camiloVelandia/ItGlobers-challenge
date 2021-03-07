@@ -1,12 +1,17 @@
-import React, {useState} from 'react';
-import MenuItem from '../data.json'
+import React, { useState, useContext } from 'react';
+import MenuItem from '../data.json';
+import PageContext from '../context/PageContext';
+
+import '../styles/components/Header.css';
 
 const Header = () => {
-  const [open, setOpen] = useState(false)
+  const pageContext = useContext(PageContext);
+  const { setmenu } = pageContext;
+  const [open, setOpen] = useState(false);
 
-  const handleMenu=()=>{
-    setOpen(!open)
-  }
+  const handleMenu = () => {
+    setOpen(!open);
+  };
 
   return (
     <header>
@@ -17,7 +22,10 @@ const Header = () => {
               My Site
             </a>
           </h1>
-          <div className={`burger ${open ? 'active' : ''}`} onClick={handleMenu}>
+          <div
+            className={`burger ${open ? 'active' : ''}`}
+            onClick={handleMenu}
+          >
             <span className="burger-open">
               <svg xmlns="http://www.w3.org/2000/svg" width="24" height="16">
                 <g fill="#252a32">
@@ -36,15 +44,17 @@ const Header = () => {
           </div>
         </div>
         <ul className={`menu ${open ? 'active' : ''}`}>
-          {
-            MenuItem.map((item)=>(
-              <li className="menu-item" key={item.id}>
-                <a href="#" className="menu-link">
-                  {item.name}
-                </a>
-              </li>
-            ))
-          }
+          {MenuItem.map(item => (
+            <li className="menu-item" key={item.id}>
+              <a
+                href="#"
+                className="menu-link"
+                onClick={() => setmenu(item.name)}
+              >
+                {item.name}
+              </a>
+            </li>
+          ))}
         </ul>
       </nav>
     </header>
