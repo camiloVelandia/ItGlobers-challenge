@@ -56,7 +56,7 @@ export default function SimpleModal(props) {
         className="form__submit"
         onClick={props.send ? handleOpen : handleClose}
       >
-        Open Modal
+        Enviar
       </button>
       <Modal
         open={open}
