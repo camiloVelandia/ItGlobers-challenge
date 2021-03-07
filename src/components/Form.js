@@ -1,11 +1,13 @@
-import React, { useRef, useContext } from 'react';
+import React, { useRef, useContext, useState } from 'react';
 import PageContext from '../context/PageContext';
 import '../styles/components/Form.css';
+import Modal from './Modal';
 
 const Form = () => {
   const menuItemActive = useContext(PageContext);
   const form = useRef(null);
   const range = [];
+  const [open, setopen] = useState(false);
 
   for (let i = 18; i <= 100; i++) {
     const number = i;
@@ -22,6 +24,7 @@ const Form = () => {
       edad: formData.get('edad'),
     };
     console.log(info);
+    setopen(true);
   };
 
   return (
@@ -58,7 +61,8 @@ const Form = () => {
           </select>
         </div>
 
-        <input className="form__submit" type="submit" value="Enviar" />
+        {/* <input className="form__submit" type="submit" value="Enviar" /> */}
+        <Modal type="submit" value="Enviar" send={open} />
       </form>
     </section>
   );
